@@ -9,6 +9,63 @@
 		die();
 	}
 
+	//Funcion que inserta el chip a la tabla cuando ya fue activado
+	function insertarCargo($monto, $detalle, $tipoCargo)
+	{
+
+		$query = "INSERT INTO cargo (cantidad, detalle_id, tipocargo_id)
+			VALUES('$monto', '$detalle','$tipoCargo')";
+		
+		global $db;  
+		$result = $db->query($query);
+		
+		//mysqli_close($db);
+		return $result;
+	}
+
+	//Funcion que obtiene el id del cliente
+	function obtenerIdDeposito($folio,$referencia,$cuenta_id,$usuario_id)
+	{
+		$query = "SELECT id
+					FROM detalle_deposito
+					WHERE folio = '$folio'
+					AND referencia = '$referencia'
+					AND cuenta_id = '$cuenta_id'
+					AND usuario_id = '$usuario_id'";
+		global $db;
+	
+		$result =  $db->query($query);
+		$row=mysqli_fetch_row($result);
+		return $row[0];
+	}
+
+	//Funcion que inserta el chip a la tabla cuando ya fue activado
+	function insertarDetalleDeposito($folio, $referencia, $fecha, $cuenta_id,$usuario_id)
+	{
+
+		$query = "INSERT INTO detalle_deposito (folio, referencia, fecha,cuenta_id, usuario_id)
+			VALUES('$folio', '$referencia','$fecha','$cuenta_id', '$usuario_id')";
+		
+		global $db;  
+		$result = $db->query($query);
+		
+		//mysqli_close($db);
+		return $result;
+	}
+	//Funcion que obtiene el id del cliente
+	function cliente($nombre,$direccion,$telefono)
+	{
+		$query = "SELECT id
+					FROM usuario
+					WHERE nombre = '$nombre'
+					AND direccion = '$direccion'
+					AND telefono = '$telefono'";
+		global $db;
+	
+		$result =  $db->query($query);
+		$row=mysqli_fetch_row($result);
+		return $row[0];
+	}
 	//Función que obtiene los montos por compañia
 	function banco($empresa_id)
 	{

@@ -54,7 +54,6 @@ saldo+=$(this).html();
 });
 var url = "./php/depositoSaldo?nombre="+nombre;
 console.log(valores);
-alert(saldo);
 document.location.href = "depositoSaldo?nombre="+nombre+"&direccion="+direccion+"&telefono="+telefono+"&saldo="+saldo;
 });
 });

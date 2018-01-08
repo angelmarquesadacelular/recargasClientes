@@ -16,7 +16,6 @@
 <?php
 	require ("recargaATC.php");
 	require "claseSesion.php";
-
 $sesion = new Sesion();
 if ($sesion->estadoLogin()==true) {
 $datosUsuario=$sesion->datosUsuario();

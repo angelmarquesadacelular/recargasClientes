@@ -4,7 +4,9 @@ $nombre = $_GET['nombre'];
 $direccion = $_GET['direccion'];
 $telefono = $_GET['telefono'];
 $saldo = $_GET['saldo'];
+$clienteID = cliente($nombre,$direccion,$telefono);
 $sesion = new Sesion();
+
 if ($sesion->estadoLogin()==true) {
 $datosUsuario=$sesion->datosUsuario();
   $usuarioID=$datosUsuario[0];
@@ -40,7 +42,7 @@ $datosUsuario=$sesion->datosUsuario();
           //     clearTimeout(connect);
           //   });
           // }
-          $.post("php/procesoRecarga",{task:tsk}, function(data){
+          $.post("php/procesoSaldo",{task:tsk}, function(data){
             time = 0;
             clearTimeout(connect);
           });
@@ -200,6 +202,9 @@ loadDoc("r="+str,"proc2.php",function()
       <?php
           date_default_timezone_set('america/mexico_city');
       ?>
+      <input type="text" name="nombre" value="<?php echo $clienteID ?>" style="display:none;">
+      <input type="text" name="saldo" value="<?php echo $saldo ?>" style="display:none;">
+      <input required id="folio" name="folio" maxlength="20" onkeypress = 'return tel(event)' type="text" placeholder="Folio" autofocus/>
       <input required id="referencia" name="referencia" maxlength="20" onkeypress = 'return tel(event)' type="text" placeholder="Referencia" autofocus/>
         <input type="date" name="fecha"  step="1" value="<?php echo date("Y-m-d");?>">
       <input required id="monto" onkeypress = 'return tel(event)' maxlength="10" name="monto" type="text" placeholder="Monto"/>
@@ -213,38 +218,23 @@ loadDoc("r="+str,"proc2.php",function()
 
 <script>
 $("#btn_enviar").click(function(){
-  var url = "./php/procesoRecarga"; // El script a dónde se realizará la petición.
+  var url = "./php/procesoSaldo"; // El script a dónde se realizará la petición.
     $.ajax({
       type: "POST",
       url: url,
       data: $("#formulario").serialize(), // Adjuntar los campos del formulario enviado.
       //Ejecutar antes de ser enviado
       beforeSend: function(){
-        var miCampoTexto = document.getElementById("digitos").value;
-        var miCampoTexto2 = document.getElementById("numero").value;
-        var miCampoTexto3 = document.getElementById("carrier").value;
+        var miCampoTexto = document.getElementById("referencia").value;
+        var miCampoTexto2 = document.getElementById("monto").value;
         //las condiciones de los campos del formulario
         if (miCampoTexto.length == 0 ) {
           alert('El campo 1 esta vacio!');
-          document.getElementById("digitos").focus();
+          document.getElementById("referencia").focus();
           return false;
         }else if (miCampoTexto2.length == 0 ) {
           alert('El campo 2 esta vacio!');
-          document.getElementById("numero").focus();
-          return false;
-        } else if (miCampoTexto.length < 10 ){
-          alert('Deben de ser 10 digitos, compruebe su numero en el campo 1');
-          document.getElementById("digitos").select();
-          return false;
-        }else if (miCampoTexto2.length < 10 ){
-          alert('Deben de ser 10 digitos, compruebe su numero en el campo 2');
-          document.getElementById("numero").select();
-          return false;
-        } else if (miCampoTexto != miCampoTexto2){
-          alert('los digitos del numero telefonico no coinciden');
-          document.getElementById("digitos").value = "";
-          document.getElementById("numero").value = "";
-          document.getElementById("digitos").focus();
+          document.getElementById("monto").focus();
           return false;
         }
       document.getElementById("loader").style.display="block";
@@ -264,40 +254,25 @@ $(function(){
   //funcion cunado tecla enter se presiona
   $(window).keypress(function(e){
     if (e.keyCode == 13) {
-      var url = "./php/procesoRecarga"; // El script a dónde se realizará la petición.
+      var url = "./php/procesoSaldo"; // El script a dónde se realizará la petición.
       $.ajax({
         type: "POST",
         url: url,
         data: $("#formulario").serialize(), // Adjuntar los campos del formulario enviado.
         //Ejecutar antes de ser enviado
         beforeSend: function(){
-          var miCampoTexto = document.getElementById("digitos").value;
-          var miCampoTexto2 = document.getElementById("numero").value;
-          var miCampoTexto3 = document.getElementById("carrier").value;
+          var miCampoTexto = document.getElementById("referencia").value;
+          var miCampoTexto2 = document.getElementById("monto").value;
           //las condiciones de los campos del formulario
             if (miCampoTexto.length == 0 ) {
               //alert('El campo 1 esta vacio!');
-              document.getElementById("digitos").focus();
+              document.getElementById("referencia").focus();
               return false;
             }else if (miCampoTexto2.length == 0 ) {
               //alert('El campo 2 esta vacio!');
-              document.getElementById("numero").focus();
+              document.getElementById("monto").focus();
               return false;
-            } else if (miCampoTexto.length < 10 ){
-              alert('Deben de ser 10 digitos, compruebe su numero en el campo 1');
-              document.getElementById("digitos").select();
-              return false;
-            }else if (miCampoTexto2.length < 10 ){
-              alert('Deben de ser 10 digitos, compruebe su numero en el campo 2');
-              document.getElementById("numero").select();
-              return false;
-            } else if (miCampoTexto != miCampoTexto2){
-              alert('los digitos del numero telefonico no coinciden');
-              document.getElementById("digitos").value = "";
-              document.getElementById("numero").value = "";
-              document.getElementById("digitos").focus();
-              return false;
-            }
+            } 
           document.getElementById("loader").style.display="block";
           document.getElementById("loader").innerHTML="<img src='./img/loading1.gif'>";
         },
