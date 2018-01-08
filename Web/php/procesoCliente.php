@@ -51,6 +51,8 @@ if ($sesion->estadoLogin()==true)
     	if(!empty($resultUsuario))
     	{
     		insertarPermisoUsuario($nick,$pwsOldEncriptado,$resultUsuario);
+    		$valor = 0;
+    		insertarSaldo($valor,$resultUsuario);
     		echo "<script language=\"JavaScript\">swal('Proceso exitoso.','¡Cliente guardado con exito!','success');";
 			echo "document.getElementById('nombre').value = '';";
 			echo "document.getElementById('direccion').value = '';";

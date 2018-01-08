@@ -9,7 +9,20 @@
 		die();
 	}
 
-	
+	//Funcion que inserta el chip a la tabla cuando ya fue activado
+	function insertarSaldo($valor,$usuario_id)
+	{
+
+		$query = "INSERT INTO saldo (valor, usuario_id)
+			VALUES('$valor', '$usuario_id')";
+		
+		global $db;  
+		$result = $db->query($query);
+		
+		//mysqli_close($db);
+		return $result;
+	}
+
 	//Funcion que obtiene el id del cliente
 	function porncentajeComision($comisionId)
 	{

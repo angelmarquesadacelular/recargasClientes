@@ -88,7 +88,8 @@ $datosUsuario=$sesion->datosUsuario();
 </body>
 <footer >
 Contacto: webmaster.atc.mx@gmail.com <br>
-Copyright© 2017-2018. Morpheus DSS
+Copyright© 2017-2018. Morpheus DSS<br>
+Teléfono de soporte: 4661472278
 </footer>
 </html>
 <?php
