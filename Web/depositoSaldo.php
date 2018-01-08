@@ -208,7 +208,24 @@ loadDoc("r="+str,"proc2.php",function()
       <input required id="referencia" name="referencia" maxlength="20" onkeypress = 'return tel(event)' type="text" placeholder="Referencia" autofocus/>
         <input type="date" name="fecha"  step="1" value="<?php echo date("Y-m-d");?>">
       <input required id="monto" onkeypress = 'return tel(event)' maxlength="10" name="monto" type="text" placeholder="Monto"/>
+      <tr>
+        <?php
+          $res=comision();
+        ?>
+        <select class="select" required id="comision" name="comision">
 
+          <option value="0">Comisión</option>
+
+          <?php
+            while($fila=$res->fetch_array(MYSQLI_ASSOC)){
+          ?>
+
+          <option value="<?php echo $fila['id']; ?>"><?php echo $fila['procentaje']." %"; ?></option>
+
+          <?php } ?>
+
+        </select>
+      </tr>
       <!--<     -->
       
       <button id="btn_enviar" color = "black" onclick="puntero()">Aceptar</button>

@@ -29,8 +29,10 @@ $datosUsuario=$sesion->datosUsuario();
 	$fecha = $_POST["fecha"];
 	$monto = $_POST["monto"];
 	$cliente =$_POST["nombre"];
+	$comisionId=$_POST["comision"];
 	$saldo = saldoUsuario($cliente);
-	
+	$comision = porncentajeComision($comisionId);
+	$comision = $comision/100;
 	//Realiza el deposito
 	$resultado = insertarDetalleDeposito($folio, $referencia, $fecha, $banco,$cliente);
 	$idDeposito = obtenerIdDeposito($folio,$referencia,$banco,$cliente);
@@ -39,6 +41,13 @@ $datosUsuario=$sesion->datosUsuario();
 	{
 		insertarCargo($monto, $idDeposito, 1);
 		$saldo = ($saldo+$monto);
+		actualizarSaldo($cliente,$saldo);
+		$comision = $monto * $comision;
+		echo $comision;
+		insertarDetalleComision($comision, $fecha, $cliente);
+		$idComision = obtenerIdComision($comision,$fecha,$cliente);
+		insertarCargo($comision, $idComision, 2);
+		$saldo = ($saldo+$comision);
 		actualizarSaldo($cliente,$saldo);
 		echo "<script language=\"JavaScript\">swal('Proceso exitoso.','¡Deposito hecho de manera correcta.','success');";
 		echo "document.getElementById('folio').value = '';";

@@ -9,6 +9,34 @@
 		die();
 	}
 
+	
+	//Funcion que obtiene el id del cliente
+	function porncentajeComision($comisionId)
+	{
+		$query = "SELECT procentaje
+					FROM comision
+					WHERE id = '$comisionId'";
+		global $db;
+	
+		$result =  $db->query($query);
+		$row=mysqli_fetch_row($result);
+		return $row[0];
+	}
+
+	//Función que obtiene los montos por compañia
+	function comision()
+	{
+		$query = "SELECT id, procentaje FROM comision";
+		global $db;
+	
+		$result =  $db->query($query);
+		//$row=mysqli_fetch_row($result);
+		//$count=$row[0];
+	
+		//mysqli_close($db);
+		return $result;
+	}
+
 	//Funcion que inserta el chip a la tabla cuando ya fue activado
 	function insertarCargo($monto, $detalle, $tipoCargo)
 	{
@@ -39,6 +67,21 @@
 		return $row[0];
 	}
 
+	//Funcion que obtiene el id del cliente
+	function obtenerIdComision($monto,$fecha,$usuario_id)
+	{
+		$query = "SELECT id
+					FROM detalle_comision
+					WHERE monto = '$monto'
+					AND fecha = '$fecha'
+					AND usuario_id = '$usuario_id'";
+		global $db;
+	
+		$result =  $db->query($query);
+		$row=mysqli_fetch_row($result);
+		return $row[0];
+	}
+
 	//Funcion que inserta el chip a la tabla cuando ya fue activado
 	function insertarDetalleDeposito($folio, $referencia, $fecha, $cuenta_id,$usuario_id)
 	{
@@ -52,6 +95,20 @@
 		//mysqli_close($db);
 		return $result;
 	}
+	//Funcion que inserta el chip a la tabla cuando ya fue activado
+	function insertarDetalleComision($monto, $fecha, $usuario_id)
+	{
+
+		$query = "INSERT INTO detalle_comision (monto,fecha,usuario_id)
+			VALUES('$monto', '$fecha','$usuario_id')";
+		
+		global $db;  
+		$result = $db->query($query);
+		
+		//mysqli_close($db);
+		return $result;
+	}
+
 	//Funcion que obtiene el id del cliente
 	function cliente($nombre,$direccion,$telefono)
 	{
