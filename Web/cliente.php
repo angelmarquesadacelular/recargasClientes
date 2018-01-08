@@ -93,8 +93,14 @@ $datosUsuario=$sesion->datosUsuario();
       <ul id="nav" >
           <li ><a href="recarga">Inicio</a></li>
           <li ><a href="reporte">Reporte</a></li>
+            <?php if ($permisoID == 1) {
+            echo '<li class="active"><a href="">Cliente</a></li>';
+          }
+          else{
+           echo '<li ><a href="estadoCuenta">Estado Cuenta</a></li>'; 
+          } ?>
           <?php if ($permisoID == 1) {
-            echo '<li class="active"><a href="cliente">Cliente</a></li>';
+            echo '<li ><a href="reporteSaldo">Saldo Clientes</a></li>';
           } ?>
             <li ><a href="cambioPassword">Cuenta</a></li>
             <li><a href="consultaFolio">Número</a></li>

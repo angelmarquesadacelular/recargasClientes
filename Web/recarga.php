@@ -170,6 +170,9 @@ loadDoc("r="+str,"proc2.php",function()
           else{
            echo '<li ><a href="estadoCuenta">Estado Cuenta</a></li>'; 
           } ?>
+          <?php if ($permisoID == 1) {
+            echo '<li ><a href="reporteSaldo">Saldo Clientes</a></li>';
+          } ?>
             <li ><a href="cambioPassword">Cuenta</a></li>
             <li><a href="consultaFolio">Número</a></li>
             <ul id="nav-right">

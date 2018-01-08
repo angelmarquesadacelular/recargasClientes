@@ -65,9 +65,15 @@ document.location.href = "depositoSaldo?nombre="+nombre+"&direccion="+direccion+
 	<div class="container">
       <ul id="nav" >
           <li ><a href="recarga">Inicio</a></li>
-          <li class="active"><a href="">Reporte</a></li>
-          <?php if ($permisoID == 1) {
+          <li ><a href="reporte">Reporte</a></li>
+            <?php if ($permisoID == 1) {
             echo '<li ><a href="cliente">Cliente</a></li>';
+          }
+          else{
+           echo '<li ><a href="estadoCuenta">Estado Cuenta</a></li>'; 
+          } ?>
+          <?php if ($permisoID == 1) {
+            echo '<li class="active"><a href="">Saldo Clientes</a></li>';
           } ?>
             <li ><a href="cambioPassword">Cuenta</a></li>
             <li><a href="consultaFolio">Número</a></li>
