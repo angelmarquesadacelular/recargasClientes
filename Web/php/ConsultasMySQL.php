@@ -158,7 +158,7 @@
 			where sal.usuario_id=usu.id
 			and usu.activo=true
 			and usu.empresa_id='$empresaID'
-			order by usu.nombre desc;";
+			order by usu.nombre asc;";
 
 		global $db;
 		$result = $db->query($query);
@@ -667,7 +667,8 @@
 		where rec.digitos='$folio'
 		and rec.usuario_id=usu.id
 		and rec.estado=true
-		and usu.empresa_id='$empresaID';";
+		and usu.empresa_id='$empresaID'
+		order by rec.fecha desc;";
 
 	
 		$result = $db->query($query);
@@ -681,7 +682,8 @@
 		global $db;
 
 		$query = "select rec.cantidad,rec.fecha from recarga rec,usuario usu where rec.digitos = '$folio' and usuario_id='$clienteID'
-			and rec.estado=true;";
+			and rec.estado=true
+			order by rec.fecha desc;";
 		
 	  	$result = $db->query($query);
 			 $row=mysqli_fetch_row($result);

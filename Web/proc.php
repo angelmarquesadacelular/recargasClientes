@@ -8,7 +8,7 @@ $res=montoCarrier($q);
   .select
   {
   border: 1px solid #DBE1EB;
-  font-size: 18px;
+  font-size: 16px;
   font-family: Arial, Verdana;
   padding-left: 7px;
   padding-right: 7px;
@@ -51,11 +51,17 @@ $res=montoCarrier($q);
   color: #FFFFFF;
   }
  </style>
-<select id="montoCarrier"  class="select" name="montoCarrier" onchange="myFunction2(this.value)">
+ <tr>
+  <td>
+    Monto
+  </td>
+  <td>
+    <select id="montoCarrier"  class="select" name="montoCarrier" onchange="myFunction2(this.value)">
 
-<option value="0">Monto</option>
-<?php while($fila=$res->fetch_array(MYSQLI_ASSOC)){ ?>
- <option value="<?php echo $fila['id']; ?>"><?php echo $fila['monto']; ?></option>
-<?php } ?>
+    <?php while($fila=$res->fetch_array(MYSQLI_ASSOC)){ ?>
+    <option value="<?php echo $fila['id']; ?>"><?php echo $fila['monto']; ?></option>
+    <?php } ?>
 
-</select>
+    </select>    
+  </td>
+ </tr>

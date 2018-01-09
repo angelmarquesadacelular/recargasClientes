@@ -29,10 +29,9 @@ $datosUsuario=$sesion->datosUsuario();
 	$carrierId = $_POST["carrier"];
 	$montoId = $_POST["montoCarrier"];
 	
-
 	//Saca el monto y la compañia a recargar
 	$montoCarrier = sacarMonto($montoId);
-	
+
 	$compania = sacarCompania($carrierId);
 	
 	//Saca el saldo actual del usurio

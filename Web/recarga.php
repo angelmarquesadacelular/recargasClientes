@@ -112,7 +112,7 @@ loadDoc("r="+str,"proc2.php",function()
   .select
   {
   border: 1px solid #DBE1EB;
-  font-size: 18px;
+  font-size: 16px;
   font-family: Arial, Verdana;
   padding-left: 7px;
   padding-right: 7px;
@@ -192,9 +192,9 @@ loadDoc("r="+str,"proc2.php",function()
         <?php
           $res=carrier();
         ?>
-        <select class="select" required id="carrier" name="carrier" onchange="myFunction(this.value)">
-
-          <option value="0">Compañía</option>
+        <td>Compañía</td>
+        <td>
+          <select class="select" required id="carrier" name="carrier" onchange="myFunction(this.value)">
 
           <?php
             while($fila=$res->fetch_array(MYSQLI_ASSOC)){
@@ -204,7 +204,9 @@ loadDoc("r="+str,"proc2.php",function()
 
           <?php } ?>
 
-        </select>
+          </select>
+        </td>
+        
       </tr>
       <tr>
         <div id="myDiv"></div>
@@ -231,28 +233,32 @@ $("#btn_enviar").click(function(){
         var miCampoTexto = document.getElementById("digitos").value;
         var miCampoTexto2 = document.getElementById("numero").value;
         var miCampoTexto3 = document.getElementById("carrier").value;
+        var miCampoTexto4 = document.getElementById("montoCarrier").value;
         //las condiciones de los campos del formulario
         if (miCampoTexto.length == 0 ) {
-          alert('El campo 1 esta vacio!');
+          alert('El campo número esta vacio!');
           document.getElementById("digitos").focus();
           return false;
         }else if (miCampoTexto2.length == 0 ) {
-          alert('El campo 2 esta vacio!');
+          alert('El campo verificar número esta vacio!');
           document.getElementById("numero").focus();
           return false;
         } else if (miCampoTexto.length < 10 ){
-          alert('Deben de ser 10 digitos, compruebe su numero en el campo 1');
+          alert('Deben de ser 10 digitos, compruebe su número en el campo número');
           document.getElementById("digitos").select();
           return false;
         }else if (miCampoTexto2.length < 10 ){
-          alert('Deben de ser 10 digitos, compruebe su numero en el campo 2');
+          alert('Deben de ser 10 digitos, compruebe su número en el campo verificar número');
           document.getElementById("numero").select();
           return false;
         } else if (miCampoTexto != miCampoTexto2){
-          alert('los digitos del numero telefonico no coinciden');
+          alert('Los dígitos del número telefónico no coinciden');
           document.getElementById("digitos").value = "";
           document.getElementById("numero").value = "";
           document.getElementById("digitos").focus();
+          return false;
+        }else if (miCampoTexto3 == 'Compañía'){
+          alert('Seleccione la compañia');
           return false;
         }
       document.getElementById("loader").style.display="block";

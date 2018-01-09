@@ -117,7 +117,7 @@ loadDoc("r="+str,"proc2.php",function()
   .select
   {
   border: 1px solid #DBE1EB;
-  font-size: 18px;
+  font-size: 16px;
   font-family: Arial, Verdana;
   padding-left: 7px;
   padding-right: 7px;
@@ -185,9 +185,10 @@ loadDoc("r="+str,"proc2.php",function()
         <?php
           $res=banco($empresaID);
         ?>
-        <select class="select" required id="banco" name="banco">
-
-          <option value="0">Banco</option>
+        <td>Banco
+        </td>
+        <td>
+          <select class="select" required id="banco" name="banco">
 
           <?php
             while($fila=$res->fetch_array(MYSQLI_ASSOC)){
@@ -198,6 +199,8 @@ loadDoc("r="+str,"proc2.php",function()
           <?php } ?>
 
         </select>
+        </td>
+        
       </tr>
       <?php
           date_default_timezone_set('america/mexico_city');
@@ -212,9 +215,10 @@ loadDoc("r="+str,"proc2.php",function()
         <?php
           $res=comision();
         ?>
-        <select class="select" required id="comision" name="comision">
-
-          <option value="0">Comisión</option>
+        <td>Comisión
+        </td>
+        <td>
+          <select class="select" required id="comision" name="comision">
 
           <?php
             while($fila=$res->fetch_array(MYSQLI_ASSOC)){
@@ -224,7 +228,9 @@ loadDoc("r="+str,"proc2.php",function()
 
           <?php } ?>
 
-        </select>
+        </select>  
+        </td>
+        
       </tr>
       <!--<     -->
       
